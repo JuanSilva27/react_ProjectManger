@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var logger = require('morgan');
+const connection = require("./database/config")
 
 const auth = require("./routes/auth")
 const users = require("./routes/users")
@@ -8,6 +9,8 @@ const projects = require("./routes/projects")
 const task = require("./routes/task")
 
 var app = express();
+
+connection()
 
 app.use(logger('dev'));
 app.use(express.json());
