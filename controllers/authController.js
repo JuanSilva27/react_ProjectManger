@@ -3,6 +3,7 @@ const User = require("../database/models/User")
 const errorResponse = require("../helpers/errorResponse");
 const generateJWT = require('../helpers/generateJWT');
 const generateTokenRandom = require('../helpers/generateTokenRandom');
+const { confirmRegister, frogotPassword } = require('../helpers/sendMail');
 module.exports = {
     register : async (req,res)=>{
         try {
@@ -21,12 +22,18 @@ module.exports = {
                 throw createError(400, "El email ya se encuentra registrado")
             }
 
+            const token = generateTokenRandom()
+
             user = new User(req.body)
-            user.token = generateTokenRandom()
+            user.token = token
             
             const userStore = await user.save()
             
-            //ToDo: enviar el mail de confirmacion
+            await confirmRegister({
+                name: userStore.name,
+                email: userStore.email,
+                token: userStore.token
+            })
 
             return res.status(201).json({
                 ok: true,
@@ -34,7 +41,7 @@ module.exports = {
                 data: userStore,
             })
         } catch (error) {
-            errorResponse(res, error, "Register")
+            return errorResponse(res, error, "Register")
         }
 
     },
@@ -75,7 +82,7 @@ module.exports = {
                 }
             })
         } catch (error) {
-            errorResponse(res, error, "LOGIN")
+           return errorResponse(res, error, "LOGIN")
         }
 
     },
@@ -108,7 +115,7 @@ module.exports = {
             })
 
         } catch (error) {
-            errorResponse(res, error, "CHECKED")
+            return errorResponse(res, error, "CHECKED")
         }
 
     },
@@ -126,11 +133,17 @@ module.exports = {
             if(!user){
                 throw createError(400, "Email incorrecto")
             }
-
-            user.token = generateTokenRandom()
+            
+            const token = generateTokenRandom()
+            
+            user.token = token
             await user.save();
 
-            //ToDo: Enviar mail para reestablecer contraseña
+            await frogotPassword({
+                name: user.name,
+                email: user.email,
+                token: user.token
+            })
 
             return res.status(200).json({
                 ok: true,
@@ -144,30 +157,49 @@ module.exports = {
 
     verifyToken : async (req,res)=>{
         try {
+            const {token} = req.query;
+
+            if(!token) throw createError(400,"No hay token en la petición");
+
+            const user = await User.findOne({
+                token
+            });
+
+            if(!user) throw createError(400,"Token inválido");
+
             return res.status(200).json({
                 ok: true,
                 msg:"Token verificado"
             })
         } catch (error) {
-            return res.status(error.status || 500).json({
-                ok:false,
-                msg: error.message || "Upss, hubo un error"
-            })
+            return errorResponse(res,error, "VERIFY-TOKEN")
         }
 
     },
 
     changePassword : async (req,res)=>{
         try {
+
+            const {token} = req.query
+            const {password} = req.body
+
+            if(!password) throw createError(400,"El password es obligatorio")
+
+            const user = await User.findOne({
+                token
+            })
+
+            user.password = password;
+            user.token = "";
+            await user.save();
+
             return res.status(200).json({
                 ok: true,
                 msg:"Password actualizada"
             })
         } catch (error) {
-            return res.status(error.status || 500).json({
-                ok:false,
-                msg: error.message || "Upss, hubo un error"
-            })
+            return errorResponse(res,error, "CHANGE-PASSWORD")
+
         }
 
     },

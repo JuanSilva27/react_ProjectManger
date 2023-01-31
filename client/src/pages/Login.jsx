@@ -3,18 +3,11 @@ import { Link } from "react-router-dom";
 import { Container, Row, FormGroup, Form, Col, Button } from "react-bootstrap";
 export const Login = () => {
   return (
-    /* <div>
-      <nav>
-        <Link to={"/register"}>¿No tenés una cuenta? Registrate</Link>
-        <Link to={"/forget-password"}>Olvidé mi password</Link>
-      </nav>
-    </div> */
-
-    <Container className="mt-5">
+    
       <Row>
-        <Col sm={12} lg={9} className="mb-4">
-          <h1>Iniciá sesión</h1>
+        <Col xs={12} lg={9} className="mb-4">
           <Form>
+          <h1>Iniciá sesión</h1>
             <FormGroup className="mb-1" controlId="formBasicEmail">
               <Form.Label htmlFor="email">Correo electrónico</Form.Label>
               <Form.Control
@@ -33,10 +26,15 @@ export const Login = () => {
               />
             </FormGroup>
 
-            <Button variant="primary" type="submit">Iniciar sessión</Button>
+            <Button variant="primary" type="submit">
+              Iniciar sessión
+            </Button>
           </Form>
+          <nav>
+            <Link to={"/register"}>¿No tenés una cuenta? Registrate</Link>
+            <Link to={"/forget-password"}>Olvidé mi password</Link>
+          </nav>
         </Col>
       </Row>
-    </Container>
   );
 };
