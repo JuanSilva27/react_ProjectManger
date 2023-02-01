@@ -9,12 +9,24 @@ const projects = require("./routes/projects")
 const task = require("./routes/task")
 
 const app = express();
+const cors = require("cors");
+const whiteList = [process.env.URL_FRONT]
+const corsOptions = {
+  origin : function (origin, cb){
+    if(whiteList.includes(origin)){
+      cb(null,true)
+    }else{
+      cb(new Error("Error de Cors"))
+    }
+  }
+}
 
 connection()
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors(corsOptions))
 
 app.use("/api/auth",auth)
 app.use("/api/users",users)
