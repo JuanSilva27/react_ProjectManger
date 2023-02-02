@@ -10,7 +10,7 @@ router
     .post("/login",login)
     .get("/checked", checked)
     .post("/send-token", sendToken)
-    .route("reset-password")
+    .route("/reset-password")
         .get(verifyToken)
         .post(changePassword)
 

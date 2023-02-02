@@ -32,7 +32,7 @@ module.exports = {
       text: "Reestablece tu contraseña en Project Manager",
       html: `
       <p> Hola ${name}, haz click en el siguiente enlace para reestablecer tu contraseña: <p/>
-      <a href="${process.env.URL_FRONT}/confirm/${token}">Reestablece tu contraseña</a>
+      <a href="${process.env.URL_FRONT}/recover-password/${token}">Reestablece tu contraseña</a>
       `,
     };
 

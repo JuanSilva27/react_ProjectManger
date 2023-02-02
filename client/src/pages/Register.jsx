@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { Button, Col, Container, Form, FormGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, FormGroup, Nav, Row } from "react-bootstrap";
 import { clientAxios } from "../../config/clientAxios";
 import { Alerts } from "../components/Alerts";
 import { useForm } from "../hooks/useForm";
+import {Link} from "react-router-dom"
 import Swal from 'sweetalert2'
 
 const exRegEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}/;
@@ -132,6 +133,13 @@ export const Register = () => {
 
             <Button variant="primary" type="submit" disabled={sending}>Crear cuenta</Button>
           </Form>
+          <Nav>
+              <Link
+               to={"/"}
+               >
+                ¿Estas registrado? Iniciar Sesion
+               </Link>
+          </Nav>
         </Col>
       </Row>
     </Container>
