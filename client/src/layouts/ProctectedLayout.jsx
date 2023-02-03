@@ -4,11 +4,11 @@ import useAuth from "../hooks/useAuth";
 
 export const ProctectedLayout = () => {
   const { auth, loading } = useAuth();
-  {
+  
     if (loading) {
       return <p>Cargando...</p>;
     }
-  }
+  
   return (
     <>
       {auth._id ? (
