@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
         setLoading(false)
       }
     };
+    authUser()
   }, []);
 
   return (
