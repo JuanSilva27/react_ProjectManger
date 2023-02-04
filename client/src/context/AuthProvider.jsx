@@ -28,13 +28,13 @@ const AuthProvider = ({ children }) => {
         const { data } = await clientAxios.get("/users/profile", config);
         console.log(data);
         setAuth(data.user)
-        navigate("/projects")
       } catch (error) {
         console.error(error.response?.data);
         sessionStorage.removeItem("token")
       } finally {
         console.log(loading)
         setLoading(false)
+        console.log(loading)
       }
     };
     authUser()

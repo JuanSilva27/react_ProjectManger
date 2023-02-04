@@ -10,6 +10,7 @@ const task = require("./routes/task")
 
 const app = express();
 const cors = require("cors");
+const checkToken = require('./middlewares/checkToken');
 const whiteList = [process.env.URL_FRONT]
 const corsOptions = {
   origin : function (origin, cb){
@@ -26,11 +27,11 @@ connection()
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(corsOptions))
+app.use(cors())
 
 app.use("/api/auth",auth)
 app.use("/api/users",users)
-app.use("/api/projects",projects)
+app.use("/api/projects",checkToken,projects)
 app.use("/api/task",task)
 
 

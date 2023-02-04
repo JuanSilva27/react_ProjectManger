@@ -21,6 +21,7 @@ export const Login = () => {
         setAlert({});
       }, 2000);
     }
+    reset()
   };
 
   const { formValues, handleInputChange, reset } = useForm({
