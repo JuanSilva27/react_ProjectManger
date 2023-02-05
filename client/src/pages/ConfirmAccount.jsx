@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { clientAxios } from "../../config/clientAxios";
 import { Alerts } from "../components/Alerts";
@@ -16,9 +16,6 @@ export const ConfirmAccount = () => {
     setAlert({
       msg,
     });
-    setTimeout(() => {
-      setAlert({});
-    }, 2000);
   };
 
   useEffect(() => {
@@ -39,7 +36,7 @@ export const ConfirmAccount = () => {
         });
       } catch (error) {
         console.error(error);
-        handleShowAlert(error.response.data.msg);
+        handleShowAlert(error.response?.data.msg);
       }
     };
 

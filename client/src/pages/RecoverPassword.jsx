@@ -70,16 +70,17 @@ export const RecoverPassword = () => {
 
   return (
     <>
-          <h1>Reestablecé tu contraseña</h1>
+          <h1 className="text-sky-600 font-black text-3xl capitalize">Reestablecé tu contraseña</h1>
           {alert.msg && <Alerts {...alert} />}
           {tokenChecked && (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded bg-white">
               <div className="mb-3">
-                <label htmlFor="password">Nueva contraseña</label>
+                <label htmlFor="password" className="text-gray-400 block font-bold uppercase">Nueva contraseña</label>
                 <input
                   id="password"
                   type="password"
                   placeholder="Escribí tu nueva contraseña"
+                  className="w-full mt-3 p-3 border rounded"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
