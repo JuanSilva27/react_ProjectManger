@@ -1,7 +1,14 @@
-import React from 'react'
+import React from "react";
+import { ProjectPreview } from "../components/ProjectPreview";
 
 export const Projects = () => {
   return (
-    <div>Projects</div>
-  )
-}
+    <>
+      <h1>Proyectos</h1>
+      <h1>Proyectos</h1>
+      <div>
+        <ProjectPreview />
+      </div>
+    </>
+  );
+};
