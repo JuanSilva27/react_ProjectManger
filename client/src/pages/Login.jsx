@@ -21,7 +21,7 @@ export const Login = () => {
         setAlert({});
       }, 2000);
     }
-    reset()
+    reset();
   };
 
   const { formValues, handleInputChange, reset } = useForm({
@@ -55,44 +55,73 @@ export const Login = () => {
   };
 
   return (
-    <Row>
-      <Col xs={12} lg={9} className="mb-4">
-        <Form onSubmit={handleSubmit}>
-          <h1>Iniciá sesión</h1>
-          {alert.msg && <Alerts {...alert} />}
-          <FormGroup className="mb-1">
-            <Form.Label htmlFor="email">Correo electrónico</Form.Label>
-            <Form.Control
-              id="email"
-              type="email"
-              placeholder="Ingrese su email"
-              name="email"
-              value={email}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
+    <>
+      <form
+        onSubmit={handleSubmit}
+        className="my-10 p-8 bg-white rounded-lg border shadow-lg"
+      >
+        <h1 className="text-green-600 font-black text-3xl capitalize">
+          Iniciá sesión
+        </h1>
+        {alert.msg && <Alerts {...alert} />}
+        <div className="my-5">
+          <label
+            htmlFor="email"
+            className="text-gray-400 block font-bold uppercase"
+          >
+            Correo electrónico
+          </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Ingrese su email"
+            name="email"
+            className="w-full mt-3 p-3 border rounded"
+            value={email}
+            onChange={handleInputChange}
+          />
+        </div>
 
-          <FormGroup className="mb-3">
-            <Form.Label htmlFor="password">Contraseña</Form.Label>
-            <Form.Control
-              id="password"
-              type="password"
-              placeholder="Ingrese su contraseña"
-              name="password"
-              value={password}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
+        <div className="my-5">
+          <label
+            htmlFor="password"
+            className="text-gray-400 block font-bold uppercase"
+          >
+            Contraseña
+          </label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Ingrese su contraseña"
+            name="password"
+            className="w-full mt-3 p-3 border rounded"
+            value={password}
+            onChange={handleInputChange}
+          />
+        </div>
 
-          <Button variant="primary" type="submit">
-            Iniciar sessión
-          </Button>
-        </Form>
-        <Nav>
-          <Link to={"/register"}>¿No tenés una cuenta? Registrate</Link>
-          <Link to={"/forget-password"}>Olvidé mi password</Link>
-        </Nav>
-      </Col>
-    </Row>
+        <button
+          variant="primary"
+          type="submit"
+          className="bg-green-700 w-full py-3 text-white uppercase font-sans rounded  hover:bg-sky-800 transition-colors mb-4"
+        >
+          Iniciar sessión
+        </button>
+      </form>
+      <nav className="md:flex md:justify-between">
+        <Link
+          to={"/register"}
+          className="text-sky-700 block text-center my-3 text-sm uppercase"
+        >
+          ¿No tenés una cuenta? Registrate
+        </Link>
+        <Link
+          to={"/forget-password"}
+          className="text-sky-700 block text-center my-3 text-sm uppercase"
+        >
+          Olvidé mi password
+        </Link>
+      </nav>
+    </>
   );
 };
