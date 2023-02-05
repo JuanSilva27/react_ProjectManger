@@ -1,147 +1,143 @@
 import React from "react";
 import { useState } from "react";
-import { Button, Col, Container, Form, FormGroup, Nav, Row } from "react-bootstrap";
 import { clientAxios } from "../../config/clientAxios";
 import { Alerts } from "../components/Alerts";
 import { useForm } from "../hooks/useForm";
-import {Link} from "react-router-dom"
-import Swal from 'sweetalert2'
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { Button } from "../components/Button";
 
 const exRegEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}/;
 
 export const Register = () => {
+  const [alert, setAlert] = useState({});
+  const [sending, setSending] = useState(false);
 
-  const [alert, setAlert] = useState({})
-  const [sending, setSending]= useState(false)
-
-  const {formValues,setFromValues,handleInputChange,reset} = useForm({
-    name : "",
+  const { formValues, setFromValues, handleInputChange, reset } = useForm({
+    name: "",
     email: "",
-    password:"",
-    password2:""
-  })
+    password: "",
+    password2: "",
+  });
 
-  const {name, email, password, password2} = formValues
+  const { name, email, password, password2 } = formValues;
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault()
-    if([name,email,password,password2].includes("")){
-      handleShowAlert("Todos los campos son obligatorios")
-      return null
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if ([name, email, password, password2].includes("")) {
+      handleShowAlert("Todos los campos son obligatorios");
+      return null;
     }
 
-    if(!exRegEmail.test(email)){
-      handleShowAlert("El email tiene un formato invalido")
-      return null
+    if (!exRegEmail.test(email)) {
+      handleShowAlert("El email tiene un formato invalido");
+      return null;
     }
 
-    if(password !== password2){
-      handleShowAlert("Las contraseñas tienen que ser Iguales")
-      return null
+    if (password !== password2) {
+      handleShowAlert("Las contraseñas tienen que ser Iguales");
+      return null;
     }
 
     try {
+      setSending(true);
 
-      setSending(true)
-
-      const {data} = await clientAxios.post(`/auth/register`,{
+      const { data } = await clientAxios.post(`/auth/register`, {
         name,
         email,
-        password
-      })
+        password,
+      });
 
-      setSending(false)
-      console.log(data.data)
+      setSending(false);
+      console.log(data.data);
       Swal.fire({
-        icon:"info",
-        title:"Gracias por registrarte",
-        text: data.msg
-      })
+        icon: "info",
+        title: "Gracias por registrarte",
+        text: data.msg,
+      });
     } catch (error) {
-      console.error(error)
-      handleShowAlert(error.response.data.msg)
+      console.error(error);
+      handleShowAlert(error.response.data.msg);
     }
-    
-  }
+  };
 
-  const handleShowAlert =(msg)=>{
+  const handleShowAlert = (msg) => {
     setAlert({
-      msg
+      msg,
     });
-    setTimeout(()=>{
-      setAlert({})
-    },2000)
-  }
+    setTimeout(() => {
+      setAlert({});
+    }, 2000);
+  };
 
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col sm={12} lg={12} className="mb-4">
-          <h1>Creá tu cuenta</h1>
-          {
-            alert.msg && <Alerts {...alert}/>
-          }
-          <Form onSubmit={handleSubmit}>
-            <FormGroup className="mb-3">
-              <Form.Label htmlFor="name">Nombre</Form.Label>
-              <Form.Control
-                id="name"
-                type="text"
-                placeholder="Ingresá tu nombre"
-                autoComplete="off"
-                value={name}
-                name="name"
-                onChange={handleInputChange}
-              />
-            </FormGroup>
-            
-            <FormGroup className="mb-3">
-              <Form.Label htmlFor="email">Correo electrónico</Form.Label>
-              <Form.Control
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Ingrese su email"
-                value={email}
-                onChange={handleInputChange}
-              />
-            </FormGroup>
+    <>
+      <h1 className="text-green-600 font-black text-3xl capitalize">
+        Creá tu cuenta
+      </h1>
+      {alert.msg && <Alerts {...alert} />}
+      <form
+        className="my-10 p-8 bg-white rounded-lg border shadow-lg"
+        onSubmit={handleSubmit}
+      >
+        <div className="mb-3">
+          <label htmlFor="name">Nombre</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Ingresá tu nombre"
+            autoComplete="off"
+            value={name}
+            name="name"
+            className="w-full mt-3 p-3 border rounded"
+            onChange={handleInputChange}
+          />
+        </div>
 
-            <FormGroup className="mb-3">
-              <Form.Label htmlFor="password">Contraseña</Form.Label>
-              <Form.Control
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Ingrese su contraseña"
-                value={password}
-                onChange={handleInputChange}
-              />
-            </FormGroup>
+        <div className="mb-3">
+          <label htmlFor="email">Correo electrónico</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            className="w-full mt-3 p-3 border rounded"
+            placeholder="Ingrese su email"
+            value={email}
+            onChange={handleInputChange}
+          />
+        </div>
 
-            <FormGroup className="mb-3">
-              <Form.Label htmlFor="password">Confirma tu Contraseña</Form.Label>
-              <Form.Control
-                id="password2"
-                type="password"
-                name="password2"
-                value={password2}
-                placeholder="Ingrese su contraseña"
-                onChange={handleInputChange}
-              />
-            </FormGroup>
+        <div className="mb-3">
+          <label htmlFor="password">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            className="w-full mt-3 p-3 border rounded"
+            placeholder="Ingrese su contraseña"
+            value={password}
+            onChange={handleInputChange}
+          />
+        </div>
 
-            <Button variant="primary" type="submit" disabled={sending}>Crear cuenta</Button>
-          </Form>
-          <Nav>
-              <Link
-               to={"/"}
-               >
-                ¿Estas registrado? Iniciar Sesion
-               </Link>
-          </Nav>
-        </Col>
-      </Row>
-    </Container>
+        <div className="mb-3">
+          <label htmlFor="password">Confirma tu Contraseña</label>
+          <input
+            id="password2"
+            type="password"
+            name="password2"
+            className="w-full mt-3 p-3 border rounded"
+            value={password2}
+            placeholder="Ingrese su contraseña"
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <Button text="Crear cuenta"/>
+      </form>
+      <nav>
+        <Link to={"/"} className="text-sky-700 block text-center my-3 text-sm uppercase">¿Estas registrado? Iniciar Sesion</Link>
+      </nav>
+    </>
   );
 };

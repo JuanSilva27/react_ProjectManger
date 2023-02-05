@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { clientAxios } from "../../config/clientAxios";
 import { Alerts } from "../components/Alerts";
+import { Button } from "../components/Button";
 
 export const RecoverPassword = () => {
   const [alert, setAlert] = useState({});
@@ -69,30 +69,24 @@ export const RecoverPassword = () => {
   }, []);
 
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col sm={12} lg={9} className="mb-4">
+    <>
           <h1>Reestablecé tu contraseña</h1>
           {alert.msg && <Alerts {...alert} />}
           {tokenChecked && (
-            <Form onSubmit={handleSubmit}>
-              <FormGroup className="mb-3">
-                <Form.Label htmlFor="password">Nueva contraseña</Form.Label>
-                <Form.Control
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="password">Nueva contraseña</label>
+                <input
                   id="password"
                   type="password"
                   placeholder="Escribí tu nueva contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-              </FormGroup>
-              <Button variant="primary" type="submit">
-                Resetea tu contraseña
-              </Button>
-            </Form>
+              </div>
+              <Button text={"Resetear contraseña"}/>
+            </form>
           )}
-        </Col>
-      </Row>
-    </Container>
+    </>
   );
 };

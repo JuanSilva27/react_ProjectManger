@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Row, FormGroup, Form, Col, Button, Nav } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "../hooks/useForm";
 import { Alerts } from "../components/Alerts";
 import { clientAxios } from "../../config/clientAxios";
 import useAuth from "../hooks/useAuth";
+import { Button } from "../components/Button";
 
 export const Login = () => {
   const [alert, setAlert] = useState({});
@@ -100,13 +100,7 @@ export const Login = () => {
           />
         </div>
 
-        <button
-          variant="primary"
-          type="submit"
-          className="bg-green-700 w-full py-3 text-white uppercase font-sans rounded  hover:bg-sky-800 transition-colors mb-4"
-        >
-          Iniciar sessión
-        </button>
+        <Button text="Iniciar sesion"/>
       </form>
       <nav className="md:flex md:justify-between">
         <Link
