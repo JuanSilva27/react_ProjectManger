@@ -4,5 +4,12 @@ module.exports = {
   theme: {
     extend: {},
   },
+  variant:{
+    extend:{
+      display:["group-focus"],
+      opacity:["group-focus"],
+      inset:["group-focus"],
+    }
+  },
   plugins: [],
 }
