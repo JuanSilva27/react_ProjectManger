@@ -16,7 +16,7 @@ export const ProctectedLayout = () => {
       {auth._id ? (
         <div>
           <Header />
-          <div>
+          <div className="flex">
             <Sidebar />
             <main className="container mx-auto mt-5 md:mt-10 p-5 md:flex md:justify-center">
               <Outlet></Outlet>
