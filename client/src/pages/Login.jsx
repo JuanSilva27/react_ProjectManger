@@ -100,7 +100,7 @@ export const Login = () => {
           />
         </div>
 
-        <Button text="Iniciar sesion"/>
+        <Button text={"Iniciar sesion"}/>
       </form>
       <nav className="md:flex md:justify-between">
         <Link

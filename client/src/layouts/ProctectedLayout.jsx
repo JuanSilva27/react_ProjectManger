@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import { Navigate, Outlet } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
@@ -18,7 +17,7 @@ export const ProctectedLayout = () => {
           <Header />
           <div className="flex">
             <Sidebar />
-            <main className="container mx-auto mt-5 md:mt-10 p-5 md:flex md:justify-center">
+            <main className="container mx-auto mt-5 md:mt-10 p-5  flex-col items-center">
               <Outlet></Outlet>
             </main>
           </div>
