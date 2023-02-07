@@ -14,7 +14,7 @@ export const Header = () => {
           className="mt-3 mb-3 p-3 border rounded"
         />
         <div className="hidden md:flex items-center pr-10 text-base font-semibold cursor-pointer">
-          <Link to="/projects" className="hover:bg-gray-200 py-4 px-6">
+          <Link to="/projects" className="hover:bg-gray-200 hover:text-green-800 font-bold  py-4 px-6">
             Proyectos
           </Link>
           <button
@@ -34,7 +34,7 @@ export const Header = () => {
             <div className="flex flex-col items-center w-full text-base cursor-pointer pt-10">
               <Link
                 to="/projects"
-                className="hover:bg-gray-200 py-4 px-6 w-full"
+                className="hover:bg-gray-200  py-4 px-6 w-full"
               >
                 Proyectos
               </Link>

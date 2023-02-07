@@ -67,8 +67,8 @@ const ProjectProvaider = ({ children }) => {
 
   const getProject = async (id) => {
     setLoading(true);
+    const token = sessionStorage.getItem("token");
     try {
-      const token = sessionStorage.getItem("token");
       if (!token) return null;
 
       const config = {

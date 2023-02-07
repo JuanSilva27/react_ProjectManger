@@ -3,7 +3,7 @@ import { ProjectPreview } from "../components/ProjectPreview";
 import useProjects from "../hooks/useProjects";
 
 export const Projects = () => {
-  const { loading, alert, projects, getProjects } = useProjects;
+  const { loading, alert, projects, getProjects } = useProjects();
 
   useEffect(() => {
     getProjects();
@@ -16,7 +16,9 @@ export const Projects = () => {
         {loading ? (
           <p>Cargando...</p>
         ) : projects.length ? (
-          projects.map((project) => <ProjectPreview key={project} />)
+          projects.map((project) => (
+            <ProjectPreview key={project._id} {...project} />
+          ))
         ) : (
           <p>No hay proyectos agregados</p>
         )}
