@@ -25,7 +25,7 @@ module.exports = {
   store: async (req, res) => {
     try {
       const { name, description, client } = req.body;
-
+      console.log(req.user)
       if (
         [name, description, client].includes("") ||
         !name ||

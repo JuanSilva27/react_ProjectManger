@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const ProjectPreview = () => {
   return (
     <>
-      <div className="my-5 mt-3 p-3 bg-gray-100 flex content-between ">
+      <div className="border-b p-3 flex justify-between">
         <p>
           Nombre del proyecto
           <span>| Cliente</span>

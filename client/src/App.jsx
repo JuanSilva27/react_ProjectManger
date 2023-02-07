@@ -12,32 +12,35 @@ import { Projects } from "./pages/Projects";
 import { ProjectAdd } from "./pages/ProjectAdd";
 import { Project } from "./pages/Project";
 import { ProjectEdit } from "./pages/ProjectEdit";
+import { ProjectProvaider } from "./context/ProjectProvaider";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          {/* Rutas publicas */}
-          <Route path="/" element={<AuthLayout />}>
-            <Route index element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forget-password" element={<ForgetPassword />} />
-            <Route path="/confirm/:token" element={<ConfirmAccount />} />
-            <Route
-              path="/recover-password/:token"
-              element={<RecoverPassword />}
-            />
-          </Route>
+        <ProjectProvaider>
+          <Routes>
+            {/* Rutas publicas */}
+            <Route path="/" element={<AuthLayout />}>
+              <Route index element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forget-password" element={<ForgetPassword />} />
+              <Route path="/confirm/:token" element={<ConfirmAccount />} />
+              <Route
+                path="/recover-password/:token"
+                element={<RecoverPassword />}
+              />
+            </Route>
 
-          {/* Rutas Privadas */}
-          <Route path="/projects" element={<ProctectedLayout />}>
-            <Route index element={<Projects />} />
-            <Route path="create-project" element={<ProjectAdd />} />
-            <Route path="edit-project/:id" element={<ProjectEdit />} />
-            <Route path=":id" element={<Project />} />
-          </Route>
-        </Routes>
+            {/* Rutas Privadas */}
+            <Route path="/projects" element={<ProctectedLayout />}>
+              <Route index element={<Projects />} />
+              <Route path="create-project" element={<ProjectAdd />} />
+              <Route path="edit-project/:id" element={<ProjectEdit />} />
+              <Route path=":id" element={<Project />} />
+            </Route>
+          </Routes>
+        </ProjectProvaider>
       </AuthProvider>
     </BrowserRouter>
   );
