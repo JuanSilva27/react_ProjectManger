@@ -35,7 +35,6 @@ const ProjectProvaider = ({ children }) => {
         setAlert({});
       }, 2000);
     }
-    reset();
   };
 
   const getProjects = async () => {
@@ -67,8 +66,8 @@ const ProjectProvaider = ({ children }) => {
 
   const getProject = async (id) => {
     setLoading(true);
-    const token = sessionStorage.getItem("token");
     try {
+      const token = sessionStorage.getItem("token");
       if (!token) return null;
 
       const config = {
@@ -79,7 +78,7 @@ const ProjectProvaider = ({ children }) => {
       };
 
       const { data } = await clientAxios.get(`/projects/${id}`, config);
-      setProject(data.projects);
+      setProject(data.project);
     } catch (error) {
       console.error(error);
       showAlert(
@@ -111,7 +110,7 @@ const ProjectProvaider = ({ children }) => {
         icon: "success",
         title: data.msg
       })
-      navigate("/")
+      navigate("projects")
     } catch (error) {
       console.error(error);
       showAlert(
