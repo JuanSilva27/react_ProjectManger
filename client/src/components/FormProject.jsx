@@ -56,14 +56,15 @@ export const FormProject = () => {
   return (
     <form
       /* onSubmit={} */
-      className="my-10 p-8 bg-white rounded-lg border shadow-lg"
+      /* my-10 p-8 bg-white rounded-lg border shadow-lg */
+      className="bg-white py-5 px-5 md:w-4/4 lg:w-3/4 rounded-md border-2"
       onSubmit={handleSubmit}
     >
       {alert.msg && <Alerts {...alert} />}
-      <div className="my-5">
+      <div className="mb-5">
         <label
           htmlFor="name"
-          className="text-gray-400 block font-bold uppercase"
+          className="text-gray-700 uppercase font-bold text-sm"
         >
           Nombre Proyecto
         </label>
@@ -71,7 +72,7 @@ export const FormProject = () => {
           id="name"
           type="text"
           placeholder="Nombre del proyecto"
-          className="w-full mt-3 p-3 border rounded"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           value={name}
           onChange={handleInputChange}
           name="name"
@@ -81,7 +82,7 @@ export const FormProject = () => {
       <div className="my-5">
         <label
           htmlFor="description"
-          className="text-gray-400 block font-bold uppercase"
+          className="text-gray-700 uppercase font-bold text-sm"
         >
           Descripción
         </label>
@@ -90,7 +91,7 @@ export const FormProject = () => {
           type="text"
           style={{ resize: "none" }}
           placeholder="Descripción del proyecto"
-          className="w-full mt-3 p-3 border rounded"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           value={description}
           onChange={handleInputChange}
           name="description"
@@ -100,14 +101,14 @@ export const FormProject = () => {
       <div className="my-5">
         <label
           htmlFor="date-expire"
-          className="text-gray-400 block font-bold uppercase"
+          className="text-gray-700 uppercase font-bold text-sm"
         >
           Fecha de entrega
         </label>
         <input
           id="date-expire"
           type="date"
-          className="w-full mt-3 p-3 border rounded"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           value={dateExpire}
           onChange={handleInputChange}
           name="dateExpire"
@@ -117,7 +118,7 @@ export const FormProject = () => {
       <div className="my-5">
         <label
           htmlFor="client"
-          className="text-gray-400 block font-bold uppercase"
+          className="text-gray-700 uppercase font-bold text-sm"
         >
           Nombre Cliente
         </label>
@@ -125,7 +126,7 @@ export const FormProject = () => {
           id="client"
           type="text"
           placeholder="Nombre del cliente"
-          className="w-full mt-3 p-3 border rounded"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           onChange={handleInputChange}
           value={client}
           name="client"

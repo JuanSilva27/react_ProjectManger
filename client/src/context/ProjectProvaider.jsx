@@ -148,18 +148,19 @@ const ProjectProvaider = ({ children }) => {
           Authorization: token,
         },
       };
-      const { data } = await clientAxios.put(
-        `/projects/${project.id}`,
-        project,
-        config
-      );
+      const { data } = await clientAxios.delete(`/projects/${id}`, config);
 
       const projectsFiltered = projects.filter((project) => project._id !== id);
+
       setProjects(projectsFiltered);
+
       Toast.fire({
         icon: "success",
         title: data.msg,
       });
+
+      navigate('projects')
+
     } catch (error) {
       console.error(error);
       showAlert(
