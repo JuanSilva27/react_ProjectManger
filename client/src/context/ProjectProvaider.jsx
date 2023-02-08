@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import { clientAxios } from "../../config/clientAxios";
 import Swal from "sweetalert2";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -22,7 +22,7 @@ const ProjectProvaider = ({ children }) => {
   const [alert, setAlert] = useState({});
   const [project, setProject] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const showAlert = (msg, time = true) => {
@@ -91,11 +91,10 @@ const ProjectProvaider = ({ children }) => {
   };
 
   const storeProject = async (project) => {
-    
-    const token = sessionStorage.getItem("token");
     try {
+      const token = sessionStorage.getItem("token");
       if (!token) return null;
-      
+
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -103,18 +102,68 @@ const ProjectProvaider = ({ children }) => {
         },
       };
 
-      const {data} = await clientAxios.post(`/projects`,project,config)
-      setProjects([...projects,data.project])
+      if (project.id) {
+        const { data } = await clientAxios.put(
+          `/projects/${project.id}`,
+          project,
+          config
+        );
+        const projectsUpdated = projects.map((projectState) => {
+          if (projectState._id === data.project._id) {
+            return data.project;
+          }
+          return projectState;
+        });
 
-      Toast.fire({
-        icon: "success",
-        title: data.msg
-      })
-      navigate("projects")
+        setProject(projectsUpdated);
+      } else {
+        const { data } = await clientAxios.post(`/projects`, project, config);
+        setProjects([...projects, data.project]);
+
+        Toast.fire({
+          icon: "success",
+          title: data.msg,
+        });
+      }
+
+      navigate("projects");
     } catch (error) {
       console.error(error);
       showAlert(
         error.resoponse ? error.response.data.msg : "ups hubo un error",
+        false
+      );
+    }
+  };
+
+  const deleteProject = async (id) => {
+    try {
+      const token = sessionStorage.getItem("token");
+
+      if (!token) return null;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      };
+      const { data } = await clientAxios.put(
+        `/projects/${project.id}`,
+        project,
+        config
+      );
+
+      const projectsFiltered = projects.filter((project) => project._id !== id);
+      setProjects(projectsFiltered);
+      Toast.fire({
+        icon: "success",
+        title: data.msg,
+      });
+    } catch (error) {
+      console.error(error);
+      showAlert(
+        error.response ? error.response.data.msg : "Hubo un error....",
         false
       );
     }
@@ -130,7 +179,8 @@ const ProjectProvaider = ({ children }) => {
         getProjects,
         project,
         getProject,
-        storeProject
+        storeProject,
+        deleteProject,
       }}
     >
       {children}

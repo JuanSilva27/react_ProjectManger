@@ -1,5 +1,5 @@
 import React from "react";
-import { FormProject } from "./FormProject";
+import { FormProject } from "../components/FormProject";
 
 export const ProjectAdd = () => {
   return (

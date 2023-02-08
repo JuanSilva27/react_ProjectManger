@@ -53,7 +53,7 @@ module.exports = {
     } catch (error) {
       return res.status(error.status || 500).json({
         ok: false,
-        msg: error.message || "Upss, hubo un error",
+        msg: error.message || "Upss, hubo un error en store",
       });
     }
   },
@@ -103,7 +103,7 @@ module.exports = {
         throw createError(401, "No estas autorizado/a");
       }
 
-      const { name, description, client } = req.body;
+      const { name, description, client, dateExpire } = req.body;
 
       project.name = name || project.name;
       project.description = description || project.description;
