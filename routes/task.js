@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { list, store, detail, update, remove, changeState }= require("../controllers/tasksController")
 
-/* /api/projects */
+/* /api/task */
 
 router
     .route("/")

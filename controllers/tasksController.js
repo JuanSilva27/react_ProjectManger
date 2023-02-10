@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const Project = require("../database/models/Project");
+const Task = require("../database/models/Task");
 const errorResponse = require("../helpers/errorResponse");
 
 module.exports = {

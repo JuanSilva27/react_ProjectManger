@@ -164,12 +164,14 @@ export const ModelTask = () => {
                       </label>
                       <select
                         className="border w-full p-2 mt-2 placeholder-grey-400 rounded-md"
+                        onChange={handleInputChange}
+                        name="priority"
                       >
                         <option value="" hidden defaultValue={true} key="">
                           Seleccione...
                         </option>
                         {["Baja", "Media", "Alta"].map((priority) => (
-                          <option value={priority} key={priority} onChange={handleInputChange}>
+                          <option value={priority} key={priority}>
                             {priority}
                           </option>
                         ))}

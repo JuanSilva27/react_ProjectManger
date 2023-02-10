@@ -159,7 +159,7 @@ const ProjectProvaider = ({ children }) => {
       const token = sessionStorage.getItem("token");
 
       if (!token) return null;
-
+      
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -188,6 +188,7 @@ const ProjectProvaider = ({ children }) => {
   };
 
   const storeTask = async (task) => {
+    console.log(project)
     try {
       const token = sessionStorage.getItem("token");
 
@@ -200,7 +201,7 @@ const ProjectProvaider = ({ children }) => {
         },
       };
       task.project = project._id;
-      const { data } = await clientAxios.post("/tasks", task, config);
+      const { data } = await clientAxios.post("/task", task, config);
       project.tasks = [...project.tasks, data.task];
       setProject(project);
       setShowModal(false);
