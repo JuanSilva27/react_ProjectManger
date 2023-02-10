@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const Project = require("../database/models/Project");
 const ObjectId = require("mongoose").Types.ObjectId;
 
+
 module.exports = {
   list: async (req, res) => {
     try {
@@ -66,7 +67,7 @@ module.exports = {
         throw createError(400, "No es un ID valido");
       }
 
-      const project = await Project.findById(id);
+      const project = await Project.findById(id).populate("task");
 
       if (!project) throw createError(404, "Projecto no encontrado");
 

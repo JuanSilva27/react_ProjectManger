@@ -1,39 +1,47 @@
-const mongoose = require("mongoose")
-const {hash, compare} = require("bcryptjs")
+const mongoose = require("mongoose");
+const { hash, compare } = require("bcryptjs");
 
-
-const projectSchema = new mongoose.Schema({
-    name : {
-        type: String,
-        required: true,
-        trim: true,
+const projectSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    description : {
-        type: String,
-        required: true,
-        trim: true,
+    description: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    dateExpire : {
-        type: Date,
-        default : Date.now()
+    dateExpire: {
+      type: Date,
+      default: Date.now(),
     },
-    client : {
-        type: String,
-        required: true,
-        trim: true,
+    client: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    createdBy : {
-        type : mongoose.Schema.Types.ObjectId,
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    collaborators: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-    },
-    collaborators : [
-        {
-            type : mongoose.Schema.Types.ObjectId,
-            ref: "User",
-        }
-    ]
-},{
-    timestamps : true,
-})
+      },
+    ],
+    tasks: [
+       { 
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Task", 
+       }
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model("Project", projectSchema)
+module.exports = mongoose.model("Project", projectSchema);

@@ -32,7 +32,7 @@ app.use(cors())
 app.use("/api/auth",auth)
 app.use("/api/users",users)
 app.use("/api/projects",checkToken,projects)
-app.use("/api/task",task)
+app.use("/api/task",checkToken,task)
 
 
 // catch 404 and forward to error handler
