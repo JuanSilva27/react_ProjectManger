@@ -8,11 +8,12 @@ import { Task } from "./Task";
 
 export const Project = () => {
   const { id } = useParams();
-  const { loading, alert, getProject, project, handleShowModal } = useProjects();
+  const { loading, alert, getProject, project, handleShowModal} = useProjects();
   const { name, description, dateExpire, client, _id } = project;
 
   useEffect(() => {
     getProject(id);
+    console.log(project.tasks)
   }, [id]);
 
   if (alert.msg) return <Alerts {...alert} />;
@@ -84,8 +85,8 @@ export const Project = () => {
               <p onClick={handleCreateTask}>Nueva Tarea</p>
             </div>
           </div>
-          {[1, 2].map((task) => (
-            <Task key={task} />
+          {project.tasks.map((task) => (
+            <Task key={task._id} name={task.name} description={task.description} dateExpire={task.dateExpire} priority={task.priority} />
           ))}
           <div className="flex items-center justify-between">
             <p className="font-bold text-3xl mt-10 mb-5">Colaboradores</p>

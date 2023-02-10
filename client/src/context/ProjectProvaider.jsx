@@ -23,6 +23,7 @@ const ProjectProvaider = ({ children }) => {
   const [project, setProject] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [alertModal, setAlertModal] = useState({});
+  const [tasks, setTasks] = useState([])
 
   const navigate = useNavigate();
 
@@ -188,7 +189,6 @@ const ProjectProvaider = ({ children }) => {
   };
 
   const storeTask = async (task) => {
-    console.log(project)
     try {
       const token = sessionStorage.getItem("token");
 
@@ -215,6 +215,28 @@ const ProjectProvaider = ({ children }) => {
       );
     }
   };
+
+  /* const listProject = async () =>{
+    try {
+      
+      const token = sessionStorage.getItem("token");
+
+      if (!token) return null;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      };
+
+      const {data} = await clientAxios.get("/task",config)
+      const taskFiltered = data.tasks.filter((task)=>task._id === project.id)
+
+    } catch (error) {
+      
+    }
+  } */
 
   return (
     <ProjectContext.Provider
