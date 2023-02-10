@@ -5,9 +5,9 @@ export const Header = () => {
   return (
     <div className=" top-0 left-0 bg-white w-full shadow">
       <div className="container m-auto flex justify-between items-center text-gray-700">
-        <h2 className="pl-8 py-4 text-xl font-bold text-green-600">
+        <a className="pl-8 py-4 text-xl font-bold text-green-600 hover:text-green-600" href="/projects">
           Projects Manager
-        </h2>
+        </a>
         <input
           type="text"
           placeholder="Buscar proyecto..."
@@ -19,7 +19,7 @@ export const Header = () => {
           </Link>
           <button
             type="button"
-            className="hover:bg-gray-200 py-4 px-6"
+            className="hover:bg-red-200 py-4 px-6 "
             /* onClick={closeSession} */
           >
             Cerrar sesión
@@ -40,7 +40,7 @@ export const Header = () => {
               </Link>
               <button
                 type="button"
-                className="hover:bg-gray-200 py-4 px-6 w-full"
+                className="hover:bg-red-200 py-4 px-6 w-full"
                 /* onClick={closeSession} */
               >
                 Cerrar sesión
