@@ -13,8 +13,9 @@ export const Project = () => {
 
   useEffect(() => {
     getProject(id);
-    console.log(project.tasks)
   }, [id]);
+
+  const tasks = project.tasks
 
   if (alert.msg) return <Alerts {...alert} />;
 
@@ -85,9 +86,9 @@ export const Project = () => {
               <p onClick={handleCreateTask}>Nueva Tarea</p>
             </div>
           </div>
-          {project.tasks.map((task) => (
+          {tasks ? tasks.map((task) => (
             <Task key={task._id} name={task.name} description={task.description} dateExpire={task.dateExpire} priority={task.priority} />
-          ))}
+          )): null}
           <div className="flex items-center justify-between">
             <p className="font-bold text-3xl mt-10 mb-5">Colaboradores</p>
 

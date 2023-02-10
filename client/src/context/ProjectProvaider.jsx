@@ -216,27 +216,7 @@ const ProjectProvaider = ({ children }) => {
     }
   };
 
-  /* const listProject = async () =>{
-    try {
-      
-      const token = sessionStorage.getItem("token");
 
-      if (!token) return null;
-
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      };
-
-      const {data} = await clientAxios.get("/task",config)
-      const taskFiltered = data.tasks.filter((task)=>task._id === project.id)
-
-    } catch (error) {
-      
-    }
-  } */
 
   return (
     <ProjectContext.Provider
