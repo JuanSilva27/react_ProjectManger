@@ -86,9 +86,13 @@ export const Project = () => {
               <p onClick={handleCreateTask}>Nueva Tarea</p>
             </div>
           </div>
-          {tasks ? tasks.map((task) => (
+          { tasks && tasks.length!==0 ? tasks.map((task) => (
             <Task key={task._id} name={task.name} description={task.description} dateExpire={task.dateExpire} priority={task.priority} />
-          )): null}
+          )) : <div className="bg-red-400 text-center p-3 rounded-md uppercase text-white font-bold text-sm my-8">
+                <p>
+                  No hay tareas asginadas a este Proyecto
+                </p>
+              </div>}
           <div className="flex items-center justify-between">
             <p className="font-bold text-3xl mt-10 mb-5">Colaboradores</p>
 
