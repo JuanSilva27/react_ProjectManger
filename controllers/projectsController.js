@@ -17,10 +17,7 @@ module.exports = {
         projects,
       });
     } catch (error) {
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "Upss, hubo un error en Projects-List",
-      });
+      errorResponse(res,error, "PROJECT-LIST");
     }
   },
 
@@ -53,10 +50,7 @@ module.exports = {
         project: projectStrore,
       });
     } catch (error) {
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "Upss, hubo un error en store",
-      });
+      errorResponse(res,error, "STORE");
     }
   },
 
@@ -117,10 +111,7 @@ module.exports = {
         project: projectUpdated,
       });
     } catch (error) {
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "Upss, hubo un error en Update",
-      });
+      errorResponse(res,error, "UPDATE");
     }
   },
 
@@ -147,10 +138,7 @@ module.exports = {
         msg: "Proyecto eliminado",
       });
     } catch (error) {
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "Upss, hubo un error",
-      });
+      errorResponse(res,error, "REMOVE");
     }
   },
 

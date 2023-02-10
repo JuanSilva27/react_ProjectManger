@@ -6,15 +6,16 @@ const errorResponse = require("../helpers/errorResponse");
 module.exports = {
   list: async (req, res) => {
     try {
+
+      const tasks = await Task.find()
+      
       return res.status(201).json({
         ok: true,
         msg: "Lista de Tareas",
+        tasks
       });
     } catch (error) {
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "Upss, hubo un error",
-      });
+      errorResponse(res,error, "TASK-LIST");
     }
   },
 
