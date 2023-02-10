@@ -24,7 +24,7 @@ export const ProjectEdit = () => {
   return (
     <>
       <div className="flex justify-between">
-        <h1 className="text-4x1 font-black">
+        <h1 className="text-green-600 font-black text-4xl capitalize">
           Editar proyecto
         </h1>
         <div className="justify-center items-center gap-2 text-gray-600 hover:text-black">
