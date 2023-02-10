@@ -2,9 +2,10 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useForm } from "../hooks/useForm";
 import useProjects from "../hooks/useProjects";
+import { Alerts } from "./Alerts";
 
 export const ModelTask = () => {
-  const { showModal, handleShowModal, alert, showAlert, storeTask } =
+  const { showModal, handleShowModal,storeTask, showAlertModal, alertModal } =
     useProjects();
 
   const handleClosed = () => {
@@ -22,8 +23,9 @@ export const ModelTask = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log([name,description,priority,dateExpire])
     if ([name, description, priority, dateExpire].includes("")) {
-      showAlert("Todos los campos son obligatorios");
+      showAlertModal("Todos los campos son obligatorios");
 
       return null;
     }
@@ -101,6 +103,9 @@ export const ModelTask = () => {
                   >
                     Nueva Tarea
                   </Dialog.Title>
+                  {
+                    alertModal.msg && <Alerts {...alertModal}/>
+                  }
                   <form className="my-10" onSubmit={handleSubmit}>
                     <div className="mb-5">
                       <label
@@ -159,15 +164,13 @@ export const ModelTask = () => {
                       </label>
                       <select
                         className="border w-full p-2 mt-2 placeholder-grey-400 rounded-md"
-                        value={priority}
-                        onChange={handleInputChange}
                       >
                         <option value="" hidden defaultValue={true} key="">
                           Seleccione...
                         </option>
-                        {["Baja", "Media", "Alta"].map((prioridad) => (
-                          <option value={prioridad} key={prioridad}>
-                            {prioridad}
+                        {["Baja", "Media", "Alta"].map((priority) => (
+                          <option value={priority} key={priority} onChange={handleInputChange}>
+                            {priority}
                           </option>
                         ))}
                       </select>

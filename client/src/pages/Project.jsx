@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Alerts } from "../components/Alerts";
+import { ModelTask } from "../components/ModelTask";
 import { useProjects } from "../hooks/useProjects";
 import { Collaborator } from "./Collaborator";
 import { Task } from "./Task";
 
 export const Project = () => {
   const { id } = useParams();
-  const { loading, alert, getProject, project } = useProjects();
+  const { loading, alert, getProject, project, handleShowModal } = useProjects();
   const { name, description, dateExpire, client, _id } = project;
 
   useEffect(() => {
@@ -16,12 +17,17 @@ export const Project = () => {
 
   if (alert.msg) return <Alerts {...alert} />;
 
+  const handleCreateTask =()=>{
+    handleShowModal()
+  }
+
   return (
     <div>
       {loading ? (
         <p>Cargando...</p>
       ) : (
         <>
+          <ModelTask></ModelTask>
           <div className="flex justify-between">
             <h1 className="text-4xl uppercase font-bold">{name}</h1>
             <Link
@@ -75,7 +81,7 @@ export const Project = () => {
                   d="M12 4.5v15m7.5-7.5h-15"
                 />
               </svg>
-              <p>Nueva Tarea</p>
+              <p onClick={handleCreateTask}>Nueva Tarea</p>
             </div>
           </div>
           {[1, 2].map((task) => (

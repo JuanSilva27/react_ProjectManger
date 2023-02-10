@@ -229,7 +229,9 @@ const ProjectProvaider = ({ children }) => {
         deleteProject,
         alertModal,
         showAlertModal,
-        storeTask
+        storeTask,
+        handleShowModal,
+        showModal
       }}
     >
       {children}
