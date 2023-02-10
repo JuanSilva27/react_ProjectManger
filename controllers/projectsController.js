@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const Project = require("../database/models/Project");
+const errorResponse = require("../helpers/errorResponse");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 
@@ -67,7 +68,7 @@ module.exports = {
         throw createError(400, "No es un ID valido");
       }
 
-      const project = await Project.findById(id).populate("task");
+      const project = await Project.findById(id).populate("tasks");
 
       if (!project) throw createError(404, "Projecto no encontrado");
 
@@ -81,10 +82,7 @@ module.exports = {
         project,
       });
     } catch (error) {
-      return res.status(error.status || 500).json({
-        ok: false,
-        msg: error.message || "Upss, hubo un error en DETAIL",
-      });
+      errorResponse(res,error, "DETAIL-PROJECT")
     }
   },
 

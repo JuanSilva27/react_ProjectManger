@@ -2,13 +2,16 @@ const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
 const connection = require("./database/config")
+require("./database/models/Task")
+
+const app = express();
+
 
 const auth = require("./routes/auth")
 const users = require("./routes/users")
 const projects = require("./routes/projects")
 const task = require("./routes/task")
 
-const app = express();
 const cors = require("cors");
 const checkToken = require('./middlewares/checkToken');
 const whiteList = [process.env.URL_FRONT]
